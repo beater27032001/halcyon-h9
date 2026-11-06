@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "screenshots": "node scripts/screenshots.ts"
+    "screenshots": "node scripts/screenshots.ts",
+    "check": "node src/domain/gpu.check.ts"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.2",
