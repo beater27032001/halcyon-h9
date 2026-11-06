@@ -30,16 +30,17 @@ Funciona em qualquer tela: a câmera calcula a distância para a placa caber na 
 
 ## Tecnologias
 
-| Tecnologia                                                                      | Uso                                                  |
-| ------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| [Next.js 16](https://nextjs.org) (App Router)                                   | framework, renderização estática e fontes            |
-| [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)    | interface e tipagem                                  |
-| [React Three Fiber](https://r3f.docs.pmnd.rs) + [three.js](https://threejs.org) | modelo 3D, carregado só no navegador                 |
-| [Motion](https://motion.dev)                                                    | animações ligadas ao scroll, contadores e transições |
-| [Lenis](https://lenis.darkroom.engineering)                                     | scroll suave                                         |
-| [Tailwind CSS 4](https://tailwindcss.com)                                       | estilos e layout responsivo                          |
-| [Playwright](https://playwright.dev)                                            | geração dos prints deste README                      |
-| ESLint + Prettier                                                               | padrão de código e formatação                        |
+| Tecnologia                                                                      | Uso                                                       |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| [Next.js 16](https://nextjs.org) (App Router)                                   | framework, renderização estática e fontes                 |
+| [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)    | interface e tipagem                                       |
+| [React Three Fiber](https://r3f.docs.pmnd.rs) + [three.js](https://threejs.org) | modelo 3D procedural, carregado só no navegador           |
+| [drei](https://drei.docs.pmnd.rs)                                               | estúdio de luz virtual (Lightformers) e sombra de contato |
+| [Motion](https://motion.dev)                                                    | animações ligadas ao scroll, contadores e transições      |
+| [Lenis](https://lenis.darkroom.engineering)                                     | scroll suave                                              |
+| [Tailwind CSS 4](https://tailwindcss.com)                                       | estilos e layout responsivo                               |
+| [Playwright](https://playwright.dev)                                            | geração dos prints deste README                           |
+| ESLint + Prettier                                                               | padrão de código e formatação                             |
 
 ## Como rodar
 
