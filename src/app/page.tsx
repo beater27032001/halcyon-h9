@@ -1,3 +1,4 @@
+import { Benchmarks } from '@organisms/Benchmarks'
 import { Nav } from '@organisms/Nav'
 import { Specs } from '@organisms/Specs'
 import { Stage } from '@organisms/Stage'
@@ -13,6 +14,7 @@ export default function Home() {
           <Nav />
           <Stage />
           <Specs />
+          <Benchmarks />
         </ThermalProvider>
       </SmoothScroll>
     </MotionProvider>
