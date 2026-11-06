@@ -15,13 +15,14 @@ import { formatSpec } from '@domain/gpu'
 interface Props {
   value: number
   decimals?: number
+  prefix?: string
 }
 
-export function Counter({ value, decimals = 0 }: Props) {
+export function Counter({ value, decimals = 0, prefix = '' }: Props) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '0px 0px -12% 0px' })
   const current = useMotionValue(0)
-  const text = useTransform(current, (v) => formatSpec(v, decimals))
+  const text = useTransform(current, (v) => prefix + formatSpec(v, decimals))
 
   useEffect(() => {
     if (!inView) return
@@ -33,7 +34,7 @@ export function Counter({ value, decimals = 0 }: Props) {
   }, [inView, current, value])
 
   return (
-    <motion.span ref={ref} aria-label={formatSpec(value, decimals)}>
+    <motion.span ref={ref} aria-label={prefix + formatSpec(value, decimals)}>
       {text}
     </motion.span>
   )
