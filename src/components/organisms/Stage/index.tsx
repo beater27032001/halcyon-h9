@@ -37,7 +37,7 @@ export function Stage() {
   const hintOpacity = useTransform(scrollYProgress, [0, 0.03], [1, 0])
 
   return (
-    <div ref={ref} className="relative h-[560vh]">
+    <div ref={ref} data-stage className="relative h-[560vh]">
       <div className="sticky top-0 h-svh overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(var(--color-line)_1px,transparent_1px),linear-gradient(90deg,var(--color-line)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_50%_55%,#000_10%,transparent_70%)] bg-size-[64px_64px] opacity-45" />
         <motion.div

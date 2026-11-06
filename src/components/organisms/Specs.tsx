@@ -9,7 +9,10 @@ import { SectionHeading } from '@molecules/SectionHeading'
 
 export function Specs() {
   return (
-    <section className="border-t border-line py-20 md:py-[120px]">
+    <section
+      data-section="specs"
+      className="border-t border-line py-20 md:py-[120px]"
+    >
       <div className="wrap">
         <SectionHeading eyebrow="Especificações" title="Números de bancada" />
         <motion.ul
