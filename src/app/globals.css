@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #06070b;
+  --color-panel: #0d1018;
+  --color-line: #1c2130;
+  --color-fg: #e9edf5;
+  --color-muted: #8b93a7;
+  --color-hot: #ff5a1f;
+  --color-heat-cold: #2a0f5c;
+  --color-heat-mid: #9d1aa0;
+  --color-heat-max: #ffd23f;
+  /* variáveis do next/font, definidas no <html> pelo layout */
+  --font-display: var(--font-big-shoulders), 'Arial Narrow', Impact, sans-serif;
+  --font-body: var(--font-instrument), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, Menlo, monospace;
+}
+
+@utility wrap {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-hot);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    line-height: 1.55;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-heat-max);
+    outline-offset: 2px;
+  }
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
