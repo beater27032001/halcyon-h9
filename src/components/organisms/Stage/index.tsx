@@ -39,7 +39,9 @@ export function Stage() {
   return (
     <div ref={ref} data-stage className="relative h-[560vh]">
       <div className="sticky top-0 h-svh overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(var(--color-line)_1px,transparent_1px),linear-gradient(90deg,var(--color-line)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_50%_55%,#000_10%,transparent_70%)] bg-size-[64px_64px] opacity-45" />
+        {/* fundo de estúdio: luz atrás da placa, caindo para as bordas */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_65%_at_58%_46%,#2c3345_0%,#171c28_40%,#090b10_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(var(--color-line)_1px,transparent_1px),linear-gradient(90deg,var(--color-line)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_50%_55%,#000_10%,transparent_70%)] bg-size-[64px_64px] opacity-30" />
         <motion.div
           role="img"
           aria-label="Modelo 3D da placa de vídeo Halcyon H9"
