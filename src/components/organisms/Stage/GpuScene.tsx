@@ -1,15 +1,22 @@
 'use client'
 
-import { createContext, use, useEffect, useRef, useState } from 'react'
+import { createContext, use, useEffect, useMemo, useRef, useState } from 'react'
 
-import { Canvas, useFrame, type ThreeElements } from '@react-three/fiber'
+import {
+  Canvas,
+  useFrame,
+  useThree,
+  type ThreeElements,
+} from '@react-three/fiber'
 import { useReducedMotion, type MotionValue } from 'motion/react'
 import {
   Color,
+  PMREMGenerator,
   type DirectionalLight,
   type Group,
   type MeshStandardMaterial,
 } from 'three'
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 
 import { explosion, fanRpm, fanSpeed, heat } from '@domain/gpu'
 
@@ -109,6 +116,20 @@ const VRAM: [number, number][] = [
 const FIN_X = range(61).map((i) => -2.9 + i * (5.8 / 60))
 const BLADE_ANGLES = range(9).map((b) => (b / 9) * Math.PI * 2)
 const KEY_LIGHT = 1.15 * Math.PI
+const FOV = 32
+/** Largura que precisa caber na tela: a placa tem 6,25 de comprimento e gira. */
+const FIT_WIDTH = 7
+
+/** Reflexos para as peças metálicas, gerados localmente (sem baixar HDR). */
+function Reflections() {
+  const gl = useThree((state) => state.gl)
+  const env = useMemo(
+    () => new PMREMGenerator(gl).fromScene(new RoomEnvironment(), 0.04).texture,
+    [gl],
+  )
+  useEffect(() => () => env.dispose(), [env])
+  return <primitive object={env} attach="environment" />
+}
 
 function Gpu({ progress, rpm, thermal }: SceneProps) {
   const [parts] = useState(() => new Set<PartEntry>())
@@ -137,9 +158,10 @@ function Gpu({ progress, rpm, thermal }: SceneProps) {
       0,
     )
 
-    // em telas estreitas a câmera recua para a placa caber inteira
-    const narrow = size.width / size.height < 0.9
-    const dist = (narrow ? 19 : 12.5) + e * (narrow ? 5 : 3.5)
+    // a câmera recua o quanto precisar para a placa caber na largura da tela
+    const aspect = size.width / size.height
+    const fit = FIT_WIDTH / (2 * Math.tan(((FOV / 2) * Math.PI) / 180) * aspect)
+    const dist = Math.max(12.5, fit) + e * 3.5
     camera.position.set(0, dist * 0.42, dist)
     camera.lookAt(0, 0.4 + e * 0.6, 0)
 
@@ -158,6 +180,7 @@ function Gpu({ progress, rpm, thermal }: SceneProps) {
 
   return (
     <PartsContext value={parts}>
+      <Reflections />
       <hemisphereLight args={['#c6d6ff', '#120806', 0.75 * Math.PI]} />
       <directionalLight ref={key} position={[4, 9, 6]} intensity={KEY_LIGHT} />
       <pointLight
@@ -396,8 +419,9 @@ export default function GpuScene({
       linear
       flat
       dpr={[1, 2]}
-      camera={{ fov: 32, near: 0.1, far: 100, position: [0, 5, 12.5] }}
+      camera={{ fov: FOV, near: 0.1, far: 100, position: [0, 5, 12.5] }}
       gl={{ antialias: true, alpha: true }}
+      scene={{ environmentIntensity: 0.8 }}
       onCreated={onReady}
       fallback={null}
     >
